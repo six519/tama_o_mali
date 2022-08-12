@@ -78,3 +78,9 @@ void Game::run()
 		}
 	}
 }
+
+Size Game::get_image_size(Mat image)
+{
+	Size s = image.size();
+	return s;
+}

@@ -28,6 +28,7 @@ class Game
     public:
 		Game();
         void run();
+		Size get_image_size(Mat image);
 		Mix_Music *load_music(string fname);
 		Mix_Chunk *load_sound(string fname);
 };
