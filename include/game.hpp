@@ -18,10 +18,13 @@ class Game
 {
 	private:
 		Mix_Music *music;
+		Mix_Chunk *right;
+		Mix_Chunk *wrong;
     public:
 		Game();
         void run();
 		Mix_Music *load_music(string fname);
+		Mix_Chunk *load_sound(string fname);
 };
 
 #endif
