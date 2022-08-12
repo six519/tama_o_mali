@@ -18,6 +18,18 @@ Game::Game()
 	//load images
 	press_image = load_image("data/enter.png");
 	title_image = load_image("data/title.png");
+	right_orange_image = load_image("data/tama_orange.png");
+	right_green_image = load_image("data/tama_green.png");
+	right_red_image = load_image("data/tama_red.png");
+
+	wrong_orange_image = load_image("data/mali_orange.png");
+	wrong_green_image = load_image("data/mali_green.png");
+	wrong_red_image = load_image("data/mali_red.png");
+
+	press_image_size = get_image_size(press_image);
+	title_image_size = get_image_size(title_image);
+	right_image_size = get_image_size(right_orange_image);
+	wrong_image_size = get_image_size(wrong_orange_image);
 
 	//init webcam
 	VideoCapture vc(0);
@@ -87,10 +99,7 @@ void Game::run()
 {
 	Mat tmp_image;
 	vc >> cam_image;
-
-	Size cam_image_size = get_image_size(cam_image);
-	Size press_image_size = get_image_size(press_image);
-	Size title_image_size = get_image_size(title_image);
+	cam_image_size = get_image_size(cam_image);
 
 	while(true)
 	{
@@ -102,16 +111,26 @@ void Game::run()
 		
 		switch(state)
 		{
+			case game_start:
+				handle_game();
+			break;
+			case game_over:
+			break;
 			default:
 				// title
-				draw_transparent_image(title_image, cam_image, cam_image_size.width - (title_image_size.width + 20), 20);
+				draw_transparent_image(press_image, cam_image, (cam_image_size.width / 2) - (press_image_size.width / 2), cam_image_size.height - (press_image_size.height + 20));
 				break;
 		}
 
-		draw_transparent_image(press_image, cam_image, (cam_image_size.width / 2) - (press_image_size.width / 2), cam_image_size.height - (press_image_size.height + 20));
+		draw_transparent_image(title_image, cam_image, cam_image_size.width - (title_image_size.width + 20), 20);
 
 		imshow(GAME_TITLE, cam_image);
 		char chr = (char)waitKey(1);
+
+		if ((int)chr == 13 && state == title) 
+		{
+			state = game_start;
+		}
 
 		if ((int)chr == 27) 
 		{
@@ -130,4 +149,14 @@ Size Game::get_image_size(Mat image)
 {
 	Size s = image.size();
 	return s;
+}
+
+void Game::handle_game()
+{
+	int right_x = ((cam_image_size.width / 2) / 2) - (right_image_size.width / 2);
+	int wrong_x = (((cam_image_size.width / 2) / 2) - (wrong_image_size.width / 2)) + (cam_image_size.width / 2);
+	int button_y = cam_image_size.height - (right_image_size.height + 20);
+
+	draw_transparent_image(right_orange_image, cam_image, right_x, button_y);
+	draw_transparent_image(wrong_orange_image, cam_image, wrong_x, button_y);
 }

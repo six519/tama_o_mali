@@ -33,8 +33,19 @@ class Game
 		Mat cam_image;
 		Mat press_image;
 		Mat title_image;
+		Mat right_green_image;
+		Mat wrong_green_image;
+		Mat right_red_image;
+		Mat wrong_red_image;
+		Mat right_orange_image;
+		Mat wrong_orange_image;
 		bool music_loaded;
 		game_state state;
+		Size cam_image_size;
+		Size press_image_size;
+		Size title_image_size;
+		Size right_image_size;
+		Size wrong_image_size;
     public:
 		Game();
         void run();
@@ -43,6 +54,7 @@ class Game
 		Mix_Chunk *load_sound(string fname);
 		Mat load_image(string fname);
 		void draw_transparent_image(Mat png, Mat image, int x, int y);
+		void handle_game();
 };
 
 #endif
