@@ -15,6 +15,10 @@ Game::Game()
 	right = load_sound("data/tama.wav");
 	wrong = load_sound("data/mali.wav");
 
+	//load images
+	press_image = load_image("data/enter.png");
+	title_image = load_image("data/title.png");
+
 	//init webcam
 	VideoCapture vc(0);
 	this->vc = vc;
@@ -52,9 +56,38 @@ Mix_Chunk *Game::load_sound(string fname)
 	return sound;
 }
 
+Mat Game::load_image(string fname)
+{
+	Mat img = imread(fname, IMREAD_UNCHANGED);
+
+	if (img.empty())
+	{
+		throw FileException(fname);
+	}
+
+	return img;
+}
+
+void Game::draw_transparent_image(Mat png, Mat image, int x, int y)
+{
+	Mat mask;
+	vector<Mat> layers;
+
+	split(png, layers);
+	Mat rgb[3] = { layers[0],layers[1],layers[2] };
+	mask = layers[3];
+	merge(rgb, 3, png);
+	png.copyTo(image.rowRange(y, y + png.rows).colRange(x, x + png.cols), mask);
+}
+
 void Game::run() 
 {
 	Mat tmp_image;
+	vc >> cam_image;
+
+	Size cam_image_size = get_image_size(cam_image);
+	Size press_image_size = get_image_size(press_image);
+	Size title_image_size = get_image_size(title_image);
 
 	while(true)
 	{
@@ -62,6 +95,9 @@ void Game::run()
 		//mirror camera
 		flip(cam_image, tmp_image, 1);
 		cam_image = tmp_image;
+
+		draw_transparent_image(title_image, cam_image, cam_image_size.width - (title_image_size.width + 20), 20);
+		draw_transparent_image(press_image, cam_image, (cam_image_size.width / 2) - (press_image_size.width / 2), cam_image_size.height - (press_image_size.height + 20));
 
 		imshow(GAME_TITLE, cam_image);
 		char chr = (char)waitKey(1);

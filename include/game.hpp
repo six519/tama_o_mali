@@ -24,6 +24,8 @@ class Game
 		Mix_Chunk *wrong;
 		VideoCapture vc;
 		Mat cam_image;
+		Mat press_image;
+		Mat title_image;
 		bool music_loaded;
     public:
 		Game();
@@ -31,6 +33,8 @@ class Game
 		Size get_image_size(Mat image);
 		Mix_Music *load_music(string fname);
 		Mix_Chunk *load_sound(string fname);
+		Mat load_image(string fname);
+		void draw_transparent_image(Mat png, Mat image, int x, int y);
 };
 
 #endif
