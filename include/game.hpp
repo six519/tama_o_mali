@@ -11,8 +11,10 @@
 #include <SDL_mixer.h>
 
 #define SND_CHANNELS 4
+#define GAME_TITLE "Tama o Mali"
 
 using namespace std;
+using namespace cv;
 
 class Game
 {
@@ -20,6 +22,9 @@ class Game
 		Mix_Music *music;
 		Mix_Chunk *right;
 		Mix_Chunk *wrong;
+		VideoCapture vc;
+		Mat cam_image;
+		bool music_loaded;
     public:
 		Game();
         void run();
