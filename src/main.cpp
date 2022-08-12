@@ -4,10 +4,9 @@
 
 int main()
 {
-    Game game;
-
     try 
 	{
+		Game game;
         game.run();
     }
 	catch(OtherException exception)
