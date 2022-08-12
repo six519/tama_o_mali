@@ -16,6 +16,13 @@
 using namespace std;
 using namespace cv;
 
+enum game_state
+{
+	title,
+	game_start,
+	game_over
+};
+
 class Game
 {
 	private:
@@ -27,6 +34,7 @@ class Game
 		Mat press_image;
 		Mat title_image;
 		bool music_loaded;
+		game_state state;
     public:
 		Game();
         void run();

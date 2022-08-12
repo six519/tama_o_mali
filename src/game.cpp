@@ -30,6 +30,9 @@ Game::Game()
 
 	//open window
 	namedWindow(GAME_TITLE);
+
+	//other
+	state = title;
 }
 
 Mix_Music *Game::load_music(string fname)
@@ -96,7 +99,15 @@ void Game::run()
 		flip(cam_image, tmp_image, 1);
 		cam_image = tmp_image;
 
-		draw_transparent_image(title_image, cam_image, cam_image_size.width - (title_image_size.width + 20), 20);
+		
+		switch(state)
+		{
+			default:
+				// title
+				draw_transparent_image(title_image, cam_image, cam_image_size.width - (title_image_size.width + 20), 20);
+				break;
+		}
+
 		draw_transparent_image(press_image, cam_image, (cam_image_size.width / 2) - (press_image_size.width / 2), cam_image_size.height - (press_image_size.height + 20));
 
 		imshow(GAME_TITLE, cam_image);
