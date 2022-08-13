@@ -74,6 +74,18 @@ const vector<Question> questions = {
 	{
 		"Ang Pilipinas ay isang arkipelago o kapuluan.",
 		true
+	},
+	{
+		"Payak ay mga salitang dinaragdagan ng panlapi.",
+		false
+	},
+	{
+		"Ang tambalan ay dalwang salitang\nmagkaiba ang kahulugan na kapag pinagsama\nay nagkakaroon ng bagong kahulugan.",
+		true
+	},
+	{
+		"Ang barangay ay mula sa salitang balangay.",
+		true
 	}
 };
 

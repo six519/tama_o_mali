@@ -60,6 +60,7 @@ Game::Game()
 	is_correct = false;
 	from_move = 0;
 	show_question_counter = 0;
+	wrong_answers = 0;
 }
 
 Mix_Music *Game::load_music(string fname)
@@ -177,7 +178,7 @@ void Game::handle_game()
 
 	if (current_state == show_question || current_state == show_answer)
 	{
-		draw_text(cam_image, questions[current_question].q, 10, 30);
+		draw_text(cam_image, questions[current_question].q, 10, 30, 100, 0, 100);
 	}
 
 	if (current_state == get_question)
@@ -208,10 +209,12 @@ void Game::handle_game()
 
 					if(is_correct)
 					{
+						correct_answers += 1;
 						Mix_PlayChannel(-1, right, 0);;
 					}
 					else
 					{
+						wrong_answers += 1;
 						Mix_PlayChannel(-1, wrong, 0);
 					}
 
@@ -234,10 +237,12 @@ void Game::handle_game()
 
 					if(is_correct)
 					{
+						correct_answers += 1;
 						Mix_PlayChannel(-1, right, 0);;
 					}
 					else
 					{
+						wrong_answers += 1;
 						Mix_PlayChannel(-1, wrong, 0);
 					}
 				}
@@ -307,14 +312,14 @@ int Game::generate_random_number(int min, int max)
 	return rand()%(max-min) + min;
 }
 
-void Game::draw_text(Mat image, string str, int x, int y)
+void Game::draw_text(Mat image, string str, int x, int y, int r, int g, int b)
 {
 	char *ptr = strtok(&str[0], "\n");
 	int init_y = y;
 
 	while(ptr != NULL)
 	{
-		putText(image,ptr,Point(x,init_y),FONT_HERSHEY_DUPLEX,0.8,Scalar(100,0,100),2,false);
+		putText(image,ptr,Point(x,init_y),FONT_HERSHEY_DUPLEX,0.8,Scalar(r,g,b),2,false);
 		init_y += 28;
 		ptr = strtok(NULL, "\n");
 	}

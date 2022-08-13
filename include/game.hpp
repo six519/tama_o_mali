@@ -67,6 +67,7 @@ class Game
 		int from_move;
 		int lives;
 		int correct_answers;
+		int wrong_answers;
 		int show_question_counter;
 		bool is_correct;
     public:
@@ -79,7 +80,7 @@ class Game
 		void draw_transparent_image(Mat png, Mat image, int x, int y);
 		void handle_game();
 		int generate_random_number(int min, int max);
-		void draw_text(Mat image, string str, int x, int y);
+		void draw_text(Mat image, string str, int x, int y, int r, int g, int b);
 };
 
 #endif
