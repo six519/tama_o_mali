@@ -10,6 +10,7 @@
 #include <opencv2/imgproc.hpp>
 #include <SDL_mixer.h>
 #include <vector>
+#include <ctime>
 #include "questions.hpp"
 
 #define SND_CHANNELS 4
@@ -60,6 +61,8 @@ class Game
 		in_game_state current_state;
 		vector<Rect> faces;
 		int initial_face_x;
+		int current_question;
+		int last_move;
     public:
 		Game();
         void run();

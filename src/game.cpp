@@ -53,6 +53,8 @@ Game::Game()
 	state = title;
 	current_state = get_face;
 	initial_face_x = 0;
+	current_question = 0;
+	last_move = 0;
 }
 
 Mix_Music *Game::load_music(string fname)
@@ -161,21 +163,63 @@ Size Game::get_image_size(Mat image)
 
 void Game::handle_game()
 {
-
+	srand(time(NULL));
 	int right_x = ((cam_image_size.width / 2) / 2) - (right_image_size.width / 2);
 	int wrong_x = (((cam_image_size.width / 2) / 2) - (wrong_image_size.width / 2)) + (cam_image_size.width / 2);
 	int button_y = cam_image_size.height - (right_image_size.height + 20);
 
-
 	face_detector.detectMultiScale(cam_image, faces, 1.1, 4, CASCADE_SCALE_IMAGE, Size(20,20));
+
+	if (current_state == show_question)
+	{
+		draw_text(cam_image, questions[current_question].q, 10, 30);
+	}
+
+	if (current_state == get_question)
+	{	
+		current_question = generate_random_number(0, questions.size() - 1);
+		current_state = show_question;
+	}
 
 	for (int i = 0; i < faces.size(); i++){ 
 		if (current_state == get_face)
 		{
 			initial_face_x = faces[i].x;
 			current_state = get_question;
-			cout << initial_face_x << endl;
 			break;
+		}
+
+		if (current_state == show_question)
+		{
+			if (faces[i].x < (initial_face_x - 200))
+			{
+				if (last_move != 1) 
+				{
+					last_move = 1;
+					cout << "left" << endl;
+					break;
+				}
+			}
+
+			if (faces[i].x > (initial_face_x + 200))
+			{
+				if (last_move != 2) 
+				{
+					last_move = 2;
+					cout << "right" << endl;
+					break;
+				}
+			}
+
+			if (faces[i].x >= (initial_face_x - 80) && faces[i].x <= (initial_face_x + 80))
+			{
+				if (last_move != 0) 
+				{
+					last_move = 0;
+					cout << "back" << endl;
+					break;
+				}
+			}
 		}
 	}
 
