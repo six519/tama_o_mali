@@ -118,6 +118,18 @@ const vector<Question> questions = {
 	{
 		"Ang Mindanao ang pinakamalaking pulo sa Pilipinas.",
 		false
+	},
+	{
+		"Ang Bulkang Mayon ay matatagpuan sa Bohol.",
+		false
+	},
+	{
+		"Mindanao ang pangalawa sa pinakamalaking isla\nna binubuo ng 6 na rehiyon.",
+		true
+	},
+	{
+		"Ang lungsod ng Lipa ay matatagpuan sa lalawigan ng Batangas.",
+		true
 	}
 };
 
