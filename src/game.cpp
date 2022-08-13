@@ -175,7 +175,6 @@ void Game::draw_text(Mat image, string str, int x, int y)
 
 	while(ptr != NULL)
 	{
-		//cout << ptr << endl;
 		putText(image,ptr,Point(x,init_y),FONT_HERSHEY_DUPLEX,0.8,Scalar(100,0,100),2,false);
 		init_y += 28;
 		ptr = strtok(NULL, "\n");
