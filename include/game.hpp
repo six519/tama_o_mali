@@ -25,6 +25,13 @@ enum game_state
 	game_over
 };
 
+enum in_game_state
+{
+	get_question,
+	show_question,
+	show_answer
+};
+
 class Game
 {
 	private:
@@ -58,6 +65,7 @@ class Game
 		void draw_transparent_image(Mat png, Mat image, int x, int y);
 		void handle_game();
 		int generate_random_number(int min, int max);
+		void draw_text(Mat image, string str, int x, int y);
 };
 
 #endif

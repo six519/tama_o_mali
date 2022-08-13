@@ -153,6 +153,8 @@ Size Game::get_image_size(Mat image)
 
 void Game::handle_game()
 {
+	in_game_state current_state = get_question;
+
 	int right_x = ((cam_image_size.width / 2) / 2) - (right_image_size.width / 2);
 	int wrong_x = (((cam_image_size.width / 2) / 2) - (wrong_image_size.width / 2)) + (cam_image_size.width / 2);
 	int button_y = cam_image_size.height - (right_image_size.height + 20);
@@ -164,4 +166,18 @@ void Game::handle_game()
 int Game::generate_random_number(int min, int max)
 {
 	return rand()%(max-min) + min;
+}
+
+void Game::draw_text(Mat image, string str, int x, int y)
+{
+	char *ptr = strtok(&str[0], "\n");
+	int init_y = y;
+
+	while(ptr != NULL)
+	{
+		//cout << ptr << endl;
+		putText(image,ptr,Point(x,init_y),FONT_HERSHEY_DUPLEX,0.8,Scalar(100,0,100),2,false);
+		init_y += 28;
+		ptr = strtok(NULL, "\n");
+	}
 }
