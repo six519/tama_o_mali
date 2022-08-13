@@ -56,6 +56,10 @@ class Game
 		Size title_image_size;
 		Size right_image_size;
 		Size wrong_image_size;
+		CascadeClassifier face_detector;
+		in_game_state current_state;
+		vector<Rect> faces;
+		int initial_face_x;
     public:
 		Game();
         void run();

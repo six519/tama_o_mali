@@ -31,6 +31,12 @@ Game::Game()
 	right_image_size = get_image_size(right_orange_image);
 	wrong_image_size = get_image_size(wrong_orange_image);
 
+	//load trained model
+	if (!face_detector.load("data/face.xml"))
+	{
+		throw FileException("data/face.xml");
+	}
+
 	//init webcam
 	VideoCapture vc(0);
 	this->vc = vc;
@@ -45,6 +51,8 @@ Game::Game()
 
 	//other
 	state = title;
+	current_state = get_face;
+	initial_face_x = 0;
 }
 
 Mix_Music *Game::load_music(string fname)
@@ -153,11 +161,23 @@ Size Game::get_image_size(Mat image)
 
 void Game::handle_game()
 {
-	in_game_state current_state = get_face;
 
 	int right_x = ((cam_image_size.width / 2) / 2) - (right_image_size.width / 2);
 	int wrong_x = (((cam_image_size.width / 2) / 2) - (wrong_image_size.width / 2)) + (cam_image_size.width / 2);
 	int button_y = cam_image_size.height - (right_image_size.height + 20);
+
+
+	face_detector.detectMultiScale(cam_image, faces, 1.1, 4, CASCADE_SCALE_IMAGE, Size(20,20));
+
+	for (int i = 0; i < faces.size(); i++){ 
+		if (current_state == get_face)
+		{
+			initial_face_x = faces[i].x;
+			current_state = get_question;
+			cout << initial_face_x << endl;
+			break;
+		}
+	}
 
 	draw_transparent_image(right_orange_image, cam_image, right_x, button_y);
 	draw_transparent_image(wrong_orange_image, cam_image, wrong_x, button_y);
