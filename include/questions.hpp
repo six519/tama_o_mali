@@ -86,6 +86,18 @@ const vector<Question> questions = {
 	{
 		"Ang barangay ay mula sa salitang balangay.",
 		true
+	},
+	{
+		"Si Tomas Pinpin ang tinaguriang prinsipe ng mga makatang Pilipino.",
+		false
+	},
+	{
+		"Si Franciso Baltazar ang may akda ng Urbana at Feliza.",
+		false
+	},
+	{
+		"Si Jose Rizal ang sumulat ng Noli Me Tangere\nat El Filibusterismo.",
+		true
 	}
 };
 
