@@ -160,3 +160,8 @@ void Game::handle_game()
 	draw_transparent_image(right_orange_image, cam_image, right_x, button_y);
 	draw_transparent_image(wrong_orange_image, cam_image, wrong_x, button_y);
 }
+
+int Game::generate_random_number(int min, int max)
+{
+	return rand()%(max-min) + min;
+}

@@ -1,9 +1,11 @@
 #include <iostream>
+#include <ctime>
 #include "exception.hpp"
 #include "game.hpp"
 
 int main()
 {
+    srand(time(NULL));
     try 
 	{
 		Game game;

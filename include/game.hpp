@@ -57,6 +57,7 @@ class Game
 		Mat load_image(string fname);
 		void draw_transparent_image(Mat png, Mat image, int x, int y);
 		void handle_game();
+		int generate_random_number(int min, int max);
 };
 
 #endif
