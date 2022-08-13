@@ -63,6 +63,10 @@ class Game
 		int initial_face_x;
 		int current_question;
 		int last_move;
+		int from_move;
+		int lives;
+		int correct_answers;
+		bool is_correct;
     public:
 		Game();
         void run();

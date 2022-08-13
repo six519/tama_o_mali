@@ -55,6 +55,10 @@ Game::Game()
 	initial_face_x = 0;
 	current_question = 0;
 	last_move = 0;
+	lives = 3;
+	correct_answers = 0;
+	is_correct = false;
+	from_move = 0;
 }
 
 Mix_Music *Game::load_music(string fname)
@@ -170,7 +174,13 @@ void Game::handle_game()
 
 	face_detector.detectMultiScale(cam_image, faces, 1.1, 4, CASCADE_SCALE_IMAGE, Size(20,20));
 
-	if (current_state == show_question)
+	if (current_state == show_answer)
+	{
+		cout << "Is correct?" << endl;
+		cout << is_correct << endl;
+	}
+
+	if (current_state == show_question || current_state == show_answer)
 	{
 		draw_text(cam_image, questions[current_question].q, 10, 30);
 	}
@@ -189,38 +199,67 @@ void Game::handle_game()
 			break;
 		}
 
-		if (current_state == show_question)
+		if (faces[i].x < (initial_face_x - 200))
 		{
-			if (faces[i].x < (initial_face_x - 200))
+			if (last_move != 1) 
 			{
-				if (last_move != 1) 
+				//left
+				last_move = 1;
+				if (current_state == show_question)
 				{
-					last_move = 1;
-					cout << "left" << endl;
-					break;
-				}
-			}
+					is_correct = (questions[current_question].a)?true:false;
+					current_state = show_answer;
+					from_move = last_move;
 
-			if (faces[i].x > (initial_face_x + 200))
-			{
-				if (last_move != 2) 
-				{
-					last_move = 2;
-					cout << "right" << endl;
-					break;
-				}
-			}
+					if(is_correct)
+					{
+						Mix_PlayChannel(-1, right, 0);;
+					}
+					else
+					{
+						Mix_PlayChannel(-1, wrong, 0);
+					}
 
-			if (faces[i].x >= (initial_face_x - 80) && faces[i].x <= (initial_face_x + 80))
-			{
-				if (last_move != 0) 
-				{
-					last_move = 0;
-					cout << "back" << endl;
-					break;
 				}
+				break;
 			}
 		}
+
+		if (faces[i].x > (initial_face_x + 200))
+		{
+			if (last_move != 2) 
+			{
+				//right
+				last_move = 2;
+				if (current_state == show_question)
+				{
+					is_correct = (!questions[current_question].a)?true:false;
+					current_state = show_answer;
+					from_move = last_move;
+
+					if(is_correct)
+					{
+						Mix_PlayChannel(-1, right, 0);;
+					}
+					else
+					{
+						Mix_PlayChannel(-1, wrong, 0);
+					}
+				}
+				break;
+			}
+		}
+
+		if (faces[i].x >= (initial_face_x - 80) && faces[i].x <= (initial_face_x + 80))
+		{
+			if (last_move != 0) 
+			{
+				//back to center
+				last_move = 0;
+				break;
+			}
+		}
+
 	}
 
 	draw_transparent_image(right_orange_image, cam_image, right_x, button_y);
