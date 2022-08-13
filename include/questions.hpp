@@ -98,6 +98,26 @@ const vector<Question> questions = {
 	{
 		"Si Jose Rizal ang sumulat ng Noli Me Tangere\nat El Filibusterismo.",
 		true
+	},
+	{
+		"Pangtangi ang tumutukoy sa tiyak na pangngalan.",
+		true
+	},
+	{
+		"Pambalana ang tumutukoy sa karaniwang ngalan\nng tao, bagay, hayop, pook at pangyayari.",
+		true
+	},
+	{
+		"Tagaytay ang tinaguriang Summer Capital ng Pilipinas.",
+		false
+	},
+	{
+		"Si Pangulong Manuel L. Quezon ang Ama ng Wikang Pambansa.",
+		true
+	},
+	{
+		"Ang Mindanao ang pinakamalaking pulo sa Pilipinas.",
+		false
 	}
 };
 
