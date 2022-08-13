@@ -176,9 +176,12 @@ void Game::handle_game()
 
 	face_detector.detectMultiScale(cam_image, faces, 1.1, 4, CASCADE_SCALE_IMAGE, Size(20,20));
 
+	draw_text(cam_image, "Tamang Sagot: " + to_string(correct_answers), 10, 30, 0, 100, 0);
+	draw_text(cam_image, "Maling Sagot: " + to_string(wrong_answers), 10, 60, 128, 0, 0);
+
 	if (current_state == show_question || current_state == show_answer)
 	{
-		draw_text(cam_image, questions[current_question].q, 10, 30, 100, 0, 100);
+		draw_text(cam_image, questions[current_question].q, 10, 100, 100, 0, 100);
 	}
 
 	if (current_state == get_question)
@@ -319,7 +322,7 @@ void Game::draw_text(Mat image, string str, int x, int y, int r, int g, int b)
 
 	while(ptr != NULL)
 	{
-		putText(image,ptr,Point(x,init_y),FONT_HERSHEY_DUPLEX,0.8,Scalar(r,g,b),2,false);
+		putText(image,ptr,Point(x,init_y),FONT_HERSHEY_DUPLEX,0.8,Scalar(b,g,r),2,false);
 		init_y += 28;
 		ptr = strtok(NULL, "\n");
 	}
