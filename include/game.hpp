@@ -9,6 +9,7 @@
 #include <opencv2/objdetect.hpp>
 #include <opencv2/imgproc.hpp>
 #include <SDL_mixer.h>
+#include <vector>
 
 #define SND_CHANNELS 4
 #define GAME_TITLE "Tama o Mali"
@@ -21,6 +22,18 @@ enum game_state
 	title,
 	game_start,
 	game_over
+};
+
+struct Question {
+	string q;
+	bool a;
+};
+
+const vector<Question> questions = {
+	{
+		"Si Ferdinand Magellan ay namatay noong Abril 27, 1521\nsa isla ng Mactan.",
+		true
+	}
 };
 
 class Game
