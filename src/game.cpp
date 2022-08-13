@@ -153,7 +153,7 @@ Size Game::get_image_size(Mat image)
 
 void Game::handle_game()
 {
-	in_game_state current_state = get_question;
+	in_game_state current_state = get_face;
 
 	int right_x = ((cam_image_size.width / 2) / 2) - (right_image_size.width / 2);
 	int wrong_x = (((cam_image_size.width / 2) / 2) - (wrong_image_size.width / 2)) + (cam_image_size.width / 2);

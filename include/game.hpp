@@ -27,6 +27,7 @@ enum game_state
 
 enum in_game_state
 {
+	get_face,
 	get_question,
 	show_question,
 	show_answer
