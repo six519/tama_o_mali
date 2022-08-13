@@ -169,7 +169,6 @@ Size Game::get_image_size(Mat image)
 
 void Game::handle_game()
 {
-	srand(time(NULL));
 	int right_x = ((cam_image_size.width / 2) / 2) - (right_image_size.width / 2);
 	int wrong_x = (((cam_image_size.width / 2) / 2) - (wrong_image_size.width / 2)) + (cam_image_size.width / 2);
 	int button_y = cam_image_size.height - (right_image_size.height + 20);

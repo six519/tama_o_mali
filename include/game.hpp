@@ -10,7 +10,6 @@
 #include <opencv2/imgproc.hpp>
 #include <SDL_mixer.h>
 #include <vector>
-#include <ctime>
 #include "questions.hpp"
 
 #define SND_CHANNELS 4
