@@ -34,6 +34,34 @@ const vector<Question> questions = {
 	{
 		"Si Theodore Roosevelt, Jr. ang pinakahuling Amerikanong\nGobernador-Heneral sa Pilipinas.",
 		false
+	},
+	{
+		"Ang kasarian ng pangngalan na Nanay ay PAMBABAE.",
+		true
+	},
+	{
+		"Ang Pilipinas ay mayroong labing-pitong rehiyon.",
+		true
+	},
+	{
+		"Ang ilog Pasig ang pinakamahabang ilog sa Pilipinas.",
+		false
+	},
+	{
+		"Ang guro ay nagtuturo.\nAng kasarian ng GURO ay PAMBABAE.",
+		false
+	},
+	{
+		"Ang lapis ay matulis. Ang kasarian ng LAPIS ay DI-TIYAK.",
+		false
+	},
+	{
+		"Si ate ay naglalaba ng mga damit.\nAng ATE ay may kasarian na PAMBABAE.",
+		true
+	},
+	{
+		"Ang bata ay naglalaro.\nAng kasarian ng BATA ay PANLALAKI.",
+		false
 	}
 };
 
