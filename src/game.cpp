@@ -59,6 +59,7 @@ Game::Game()
 	correct_answers = 0;
 	is_correct = false;
 	from_move = 0;
+	show_question_counter = 0;
 }
 
 Mix_Music *Game::load_music(string fname)
@@ -174,12 +175,6 @@ void Game::handle_game()
 
 	face_detector.detectMultiScale(cam_image, faces, 1.1, 4, CASCADE_SCALE_IMAGE, Size(20,20));
 
-	if (current_state == show_answer)
-	{
-		cout << "Is correct?" << endl;
-		cout << is_correct << endl;
-	}
-
 	if (current_state == show_question || current_state == show_answer)
 	{
 		draw_text(cam_image, questions[current_question].q, 10, 30);
@@ -262,8 +257,49 @@ void Game::handle_game()
 
 	}
 
-	draw_transparent_image(right_orange_image, cam_image, right_x, button_y);
-	draw_transparent_image(wrong_orange_image, cam_image, wrong_x, button_y);
+	if (current_state == show_answer)
+	{
+
+		if (show_question_counter == SHOW_QUESTION_COUNTER)
+		{
+			current_state = get_question;
+			show_question_counter = 0;
+		}
+
+		if (from_move == 1)
+		{ 
+			//left
+			if (is_correct)
+			{
+				draw_transparent_image(right_green_image, cam_image, right_x, button_y);
+			}
+			else
+			{
+				draw_transparent_image(right_red_image, cam_image, right_x, button_y);
+			}
+			draw_transparent_image(wrong_orange_image, cam_image, wrong_x, button_y);
+		}
+		else
+		{
+			//assuming right
+			if (is_correct)
+			{
+				draw_transparent_image(wrong_green_image, cam_image, wrong_x, button_y);
+			}
+			else
+			{
+				draw_transparent_image(wrong_red_image, cam_image, wrong_x, button_y);
+			}
+			draw_transparent_image(right_orange_image, cam_image, right_x, button_y);
+		}
+
+		show_question_counter += 1;
+	}
+	else
+	{
+		draw_transparent_image(right_orange_image, cam_image, right_x, button_y);
+		draw_transparent_image(wrong_orange_image, cam_image, wrong_x, button_y);
+	}
 }
 
 int Game::generate_random_number(int min, int max)

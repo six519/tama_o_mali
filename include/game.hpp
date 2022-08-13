@@ -15,6 +15,7 @@
 
 #define SND_CHANNELS 4
 #define GAME_TITLE "Tama o Mali"
+#define SHOW_QUESTION_COUNTER 20
 
 using namespace std;
 using namespace cv;
@@ -66,6 +67,7 @@ class Game
 		int from_move;
 		int lives;
 		int correct_answers;
+		int show_question_counter;
 		bool is_correct;
     public:
 		Game();
