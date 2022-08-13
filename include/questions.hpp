@@ -62,6 +62,18 @@ const vector<Question> questions = {
 	{
 		"Ang bata ay naglalaro.\nAng kasarian ng BATA ay PANLALAKI.",
 		false
+	},
+	{
+		"Ang kasarian ng pangngalan na TITO ay PAMBABAE.",
+		false
+	},
+	{
+		"Ang labandera ay naglalaba.\nAng kasarian ng LABANDERA ay DI-TIYAK.",
+		false
+	},
+	{
+		"Ang Pilipinas ay isang arkipelago o kapuluan.",
+		true
 	}
 };
 
