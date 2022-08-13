@@ -15,7 +15,7 @@
 
 #define SND_CHANNELS 4
 #define GAME_TITLE "Tama o Mali"
-#define SHOW_QUESTION_COUNTER 20
+#define SHOW_QUESTION_COUNTER 30
 
 using namespace std;
 using namespace cv;
