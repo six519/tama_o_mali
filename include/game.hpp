@@ -78,6 +78,7 @@ class Game
 		Mat load_image(string fname);
 		void draw_transparent_image(Mat png, Mat image, int x, int y);
 		void handle_game();
+		void show_the_answer();
 		int generate_random_number(int min, int max);
 		void draw_text(Mat image, string str, int x, int y, int r, int g, int b);
 };

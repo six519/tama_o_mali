@@ -167,6 +167,23 @@ Size Game::get_image_size(Mat image)
 	return s;
 }
 
+void Game::show_the_answer()
+{
+	current_state = show_answer;
+	from_move = last_move;
+
+	if(is_correct)
+	{
+		correct_answers += 1;
+		Mix_PlayChannel(-1, right, 0);;
+	}
+	else
+	{
+		wrong_answers += 1;
+		Mix_PlayChannel(-1, wrong, 0);
+	}
+}
+
 void Game::handle_game()
 {
 	int right_x = ((cam_image_size.width / 2) / 2) - (right_image_size.width / 2);
@@ -204,19 +221,7 @@ void Game::handle_game()
 			if (current_state == show_question)
 			{
 				is_correct = questions[current_question].a;
-				current_state = show_answer;
-				from_move = last_move;
-
-				if(is_correct)
-				{
-					correct_answers += 1;
-					Mix_PlayChannel(-1, right, 0);;
-				}
-				else
-				{
-					wrong_answers += 1;
-					Mix_PlayChannel(-1, wrong, 0);
-				}
+				show_the_answer();
 
 			}
 			break;
@@ -229,19 +234,7 @@ void Game::handle_game()
 			if (current_state == show_question)
 			{
 				is_correct = !questions[current_question].a;
-				current_state = show_answer;
-				from_move = last_move;
-
-				if(is_correct)
-				{
-					correct_answers += 1;
-					Mix_PlayChannel(-1, right, 0);;
-				}
-				else
-				{
-					wrong_answers += 1;
-					Mix_PlayChannel(-1, wrong, 0);
-				}
+				show_the_answer();
 			}
 			break;
 		}
