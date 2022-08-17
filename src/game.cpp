@@ -197,59 +197,53 @@ void Game::handle_game()
 			break;
 		}
 
-		if (faces[i].x < (initial_face_x - 200))
+		if (faces[i].x < (initial_face_x - 200) && last_move != 1)
 		{
-			if (last_move != 1) 
+			//left
+			last_move = 1;
+			if (current_state == show_question)
 			{
-				//left
-				last_move = 1;
-				if (current_state == show_question)
+				is_correct = questions[current_question].a;
+				current_state = show_answer;
+				from_move = last_move;
+
+				if(is_correct)
 				{
-					is_correct = (questions[current_question].a)?true:false;
-					current_state = show_answer;
-					from_move = last_move;
-
-					if(is_correct)
-					{
-						correct_answers += 1;
-						Mix_PlayChannel(-1, right, 0);;
-					}
-					else
-					{
-						wrong_answers += 1;
-						Mix_PlayChannel(-1, wrong, 0);
-					}
-
+					correct_answers += 1;
+					Mix_PlayChannel(-1, right, 0);;
 				}
-				break;
+				else
+				{
+					wrong_answers += 1;
+					Mix_PlayChannel(-1, wrong, 0);
+				}
+
 			}
+			break;
 		}
 
-		if (faces[i].x > (initial_face_x + 200))
+		if (faces[i].x > (initial_face_x + 200) && last_move != 2)
 		{
-			if (last_move != 2) 
+			//right
+			last_move = 2;
+			if (current_state == show_question)
 			{
-				//right
-				last_move = 2;
-				if (current_state == show_question)
-				{
-					is_correct = (!questions[current_question].a)?true:false;
-					current_state = show_answer;
-					from_move = last_move;
+				is_correct = !questions[current_question].a;
+				current_state = show_answer;
+				from_move = last_move;
 
-					if(is_correct)
-					{
-						correct_answers += 1;
-						Mix_PlayChannel(-1, right, 0);;
-					}
-					else
-					{
-						wrong_answers += 1;
-						Mix_PlayChannel(-1, wrong, 0);
-					}
+				if(is_correct)
+				{
+					correct_answers += 1;
+					Mix_PlayChannel(-1, right, 0);;
 				}
-				break;
+				else
+				{
+					wrong_answers += 1;
+					Mix_PlayChannel(-1, wrong, 0);
+				}
 			}
+			break;
 		}
 
 		if (faces[i].x >= (initial_face_x - 80) && faces[i].x <= (initial_face_x + 80))
