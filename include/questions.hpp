@@ -130,6 +130,18 @@ const vector<Question> questions = {
 	{
 		"Ang lungsod ng Lipa ay matatagpuan sa lalawigan ng Batangas.",
 		true
+	},
+	{
+		"Ang Tagalog ay hango sa salitang taga-ilog.",
+		true
+	},
+	{
+		"Ang Baybayin ay isa sa mga suyat na ginamit sa Pilipinas.",
+		true
+	},
+	{
+		"Ang Maya ang pambansang ibon ng Pilipinas.",
+		false
 	}
 };
 
